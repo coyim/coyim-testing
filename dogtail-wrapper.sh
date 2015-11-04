@@ -8,5 +8,8 @@ export DISPLAY=:1.0
 # Enable Assistive Technology support
 gsettings set org.gnome.desktop.interface toolkit-accessibility true
 
-behave
+$@
+status=$?
 
+kill -9 $(pgrep Xvfb) || true
+exit $status
