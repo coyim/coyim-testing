@@ -3,12 +3,14 @@ Feature: Configuration assistant
   Scenario: Show configuration assistant
     Given the user has no account configured
     When the user opens the application
+    And choses to not encrypt the configuration file
     Then the configuration assistant is displayed
 
   Scenario: Add existing account
     Given the user has no account configured
     And Tor is listening on port 9050
     When the user opens the application
+    And choses to not encrypt the configuration file
     Then the configuration assistant is displayed
     And the "Welcome" page is displayed
     Then the user goes to the next page
@@ -24,6 +26,7 @@ Feature: Configuration assistant
     Given the user has no account configured
     And Tor is listening on port 9050
     When the user opens the application
+    And choses to not encrypt the configuration file
     Then the configuration assistant is displayed
     And the "Welcome" page is displayed
     Then the user goes to the next page
@@ -39,3 +42,4 @@ Feature: Configuration assistant
     Then the user accepts the configuration
     And the account "coyim@riseup.net" will be configured
     And it will have a safe default configuration
+
