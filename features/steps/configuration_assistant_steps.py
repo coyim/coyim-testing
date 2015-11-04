@@ -6,6 +6,7 @@ import threading
 import SocketServer
 
 from dogtail.procedural import *
+from dogtail.tc import TCNode, TCBool
 from dogtail.tree import *
 from dogtail.utils import screenshot
 
@@ -44,17 +45,12 @@ def step_impl(context):
 @when(u'choses to not encrypt the configuration file')
 def step_impl(context):
     global coyim_app
-    screenshot()
     encryptAlert = coyim_app.child(name = "Question", roleName = "alert")
     encryptAlert.button("No").doActionNamed("click")
-    screenshot()
 
 @then(u'the configuration assistant is displayed')
 def step_impl(context):
-    from dogtail.tc import TCNode
     global coyim_app
-    screenshot()
-
     configAssistant = coyim_app.child(name="Configuration Assistant", roleName = "frame")
     TCNode().compare("Found assistant", None, configAssistant)
 
@@ -71,25 +67,58 @@ def step_impl(context):
 
 @then(u'the "Welcome" page is displayed')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then the "Welcome" page is displayed')
+    global coyim_app
+    configAssistant = coyim_app.child(name="Configuration Assistant", roleName = "frame")
+    welcomeMsg = configAssistant.child(name = "Welcome to CoyIM, the safe and secure xmpp client.", roleName = "label")
+    TCNode().compare("Found welcome message", None, welcomeMsg)
 
 @then(u'the user goes to the next page')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then the user goes to the next page')
-
-@then(u'the "Account details" page is displayed')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Then the "Account details" page is displayed')
+    global coyim_app
+    configAssistant = coyim_app.child(name="Configuration Assistant", roleName = "frame")
+    configAssistant.button("Next").doActionNamed("click")
 
 @then(u'Tor is detected to be running on port 9050')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then Tor is detected to be running on port 9050')
+    global coyim_app
+    configAssistant = coyim_app.child(name="Configuration Assistant", roleName = "frame")
+    torMsg = configAssistant.child(name = "Tor detected successfully. Continue.", roleName = "label")
+    TCNode().compare("Tor is running", None, torMsg)
 
 @then(u'the user provides the following account information')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then the user provides the following account information')
+    global coyim_app
+    configAssistant = coyim_app.child(name="Configuration Assistant", roleName = "frame")
+    configAssistant.child(roleName = "text").typeText(context.table[0]["XMPP ID"])
+    configAssistant.child(roleName = "password text").typeText(context.table[0]["Password"])
 
-@then(u'the account "coyim@riseup.net" will be configured')
+@then(u'SRV consult will returns the server info')
+def step_impl(context):
+    global coyim_app
+    configAssistant = coyim_app.child(name="Configuration Assistant", roleName = "frame")
+    SRVMsg = configAssistant.child(name = "All right with SRV", roleName = "label")
+    TCNode().compare("SRV consult ok", None, SRVMsg)
+
+@then(u'the configuration step will be finished')
+def step_impl(context):
+    global coyim_app
+    configAssistant = coyim_app.child(name="Configuration Assistant", roleName = "frame")
+    enjoyMsg = configAssistant.child(name = "You are all set. Enjoy.", roleName = "label")
+    TCNode().compare("Configuration was finished", None, enjoyMsg)
+
+@then(u'the user applies the configuration')
+def step_impl(context):
+    global coyim_app
+    configAssistant = coyim_app.child(name="Configuration Assistant", roleName = "frame")
+    configAssistant.button("Apply").doActionNamed("click")
+
+@then(u'the assistent will be closed')
+def step_impl(context):
+    global coyim_app
+    configAssistant = coyim_app.child(name="Configuration Assistant", roleName = "frame")
+    TCBool().compare("Assitent window is closed", not configAssistant.showing())
+
+@then(u'the account "user@riseup.net" will be configured')
 def step_impl(context):
     raise NotImplementedError(u'STEP: Then the account "coyim@riseup.net" will be configured')
 

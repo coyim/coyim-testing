@@ -14,12 +14,18 @@ Feature: Configuration assistant
     Then the configuration assistant is displayed
     And the "Welcome" page is displayed
     Then the user goes to the next page
-    And the "Account details" page is displayed
-    Then Tor is detected to be running on port 9050
+    And Tor is detected to be running on port 9050
+    Then the user goes to the next page
     And the user provides the following account information
       | XMPP ID         | Password     |
       | user@riseup.net | use diceware |
-    Then the account "coyim@riseup.net" will be configured
+    Then the user goes to the next page
+    And SRV consult will returns the server info
+    Then the user goes to the next page
+    And the configuration step will be finished
+    Then the user applies the configuration
+    And the assistent will be closed
+    Then the account "user@riseup.net" will be configured
     And it will have a safe default configuration
 
   Scenario: Add existing account that requires server config
