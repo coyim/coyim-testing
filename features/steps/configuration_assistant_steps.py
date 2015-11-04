@@ -64,7 +64,7 @@ def step_impl(context):
     if tor_server != None:
         tor_server.shutdown()
 
-    tor_server = ThreadedTCPServer(("localhost", 9050), ThreadedTCPRequestHandler)
+    tor_server = ThreadedTCPServer(("127.0.0.1", 9050), ThreadedTCPRequestHandler)
     server_thread = threading.Thread(target=tor_server.serve_forever)
     server_thread.daemon = True
     server_thread.start()
