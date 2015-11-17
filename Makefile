@@ -4,7 +4,7 @@ default:
 	behave
 
 deps:
-	pip install behave psutil
+	pip install behave
 
 test: coyim-bin
 	docker run -t \

@@ -1,6 +1,4 @@
 import os
-import signal
-import SocketServer
 
 from dogtail.procedural import *
 from dogtail.tc import TCNode, TCBool
@@ -16,9 +14,6 @@ def step_impl(context):
 
 @when(u'the user opens the application')
 def step_impl(context):
-  if context.coy_pid != None:
-    os.kill(context.coy_pid, signal.SIGTERM)
-
   coyimPath = os.environ.get('COYIM_PATH')
   if coyimPath != None:
     executable = "%s -debug -config-file %s" % (coyimPath, coy_config_file)
