@@ -4,5 +4,15 @@ Feature: Add account
     Given the user has no account configured
     When the user opens the application
     And choses to not encrypt the configuration file
-    Then add account dialog is displayed
+    Then should display add account dialog
 
+  Scenario: Add an existing account
+    Given the user has no account configured
+    When the user opens the application
+    And choses to not encrypt the configuration file
+    When user provides the account details
+      |     XMPP ID    | Password |
+      |coyim@riseup.net|   pass   |
+    And saves the account
+    Then account should be added to account list
+      """coyim@riseup.net"""

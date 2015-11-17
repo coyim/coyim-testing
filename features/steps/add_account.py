@@ -26,7 +26,24 @@ def step_impl(context):
   encryptAlert = context.coyim_app.child(name = "Question", roleName = "alert")
   encryptAlert.button("No").doActionNamed("click")
 
-@then(u'add account dialog is displayed')
+@then(u'should display add account dialog')
 def step_impl(context):
   addAccount = context.coyim_app.child(name="Account Details", roleName = "dialog")
   TCNode().compare("Found add account dialog", None, addAccount)
+
+@when(u'user provides the account details')
+def step_impl(context):
+  addAccount = context.coyim_app.child(name="Account Details", roleName = "dialog")
+  addAccount.child(roleName = "text").typeText(context.table[0]["XMPP ID"])
+  addAccount.child(roleName = "password text").typeText(context.table[0]["Password"])
+
+@when(u'saves the account')
+def step_impl(context):
+  addAccount = context.coyim_app.child(name="Account Details", roleName = "dialog")
+  addAccount.button("Save").doActionNamed("click")
+
+@then(u'account should be added to account list')
+def step_impl(context):
+  accountMenu = context.coyim_app.menu("Accounts")
+  menuItem = accountMenu.child(context.text)
+  TCNode().compare("Account was added to menu", None, menuItem)
