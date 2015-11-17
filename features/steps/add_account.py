@@ -1,4 +1,4 @@
-import os
+import os, sys
 
 from dogtail.procedural import *
 from dogtail.tc import TCNode, TCBool
@@ -15,10 +15,14 @@ def step_impl(context):
 @when(u'the user opens the application')
 def step_impl(context):
   coyimPath = os.getenv('COYIM_PATH')
+  sys.stdout.write(coyimPath)
   executable = "%s -debug -config-file %s" % (coyimPath, coy_config_file)
 
-  context.coy_pid = run(executable)
-  context.coyim_app = root.application("CoyIM")
+  try:
+    context.coy_pid = run(executable)
+    context.coyim_app = root.application("CoyIM")
+  except OSError:
+    sys.stdout.write("Bad configuration")
 
 @when(u'choses to not encrypt the configuration file')
 def step_impl(context):
