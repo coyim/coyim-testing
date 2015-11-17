@@ -14,7 +14,7 @@ def step_impl(context):
 
 @when(u'the user opens the application')
 def step_impl(context):
-  coyimPath = os.environ.get('COYIM_PATH') or "bin/coyim"
+  coyimPath = os.getenv('COYIM_PATH')
   executable = "%s -debug -config-file %s" % (coyimPath, coy_config_file)
 
   context.coy_pid = run(executable)
