@@ -22,7 +22,7 @@ def step_impl(context):
     context.coy_pid = run(executable)
     context.coyim_app = root.application("CoyIM")
   except OSError:
-    sys.stdout.write("Bad configuration")
+    sys.stdout.write("\nBad configuration")
 
 @when(u'choses to not encrypt the configuration file')
 def step_impl(context):
