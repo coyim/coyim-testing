@@ -26,23 +26,23 @@ def step_impl(context):
 
 @when(u'choses to not encrypt the configuration file')
 def step_impl(context):
-  encryptAlert = context.coyim_app.child(name = "Question", roleName = "alert")
+  encryptAlert = context.coyim_app.child(name = "Information", roleName = "alert")
   encryptAlert.button("No").doActionNamed("click")
 
 @then(u'should display add account dialog')
 def step_impl(context):
-  addAccount = context.coyim_app.child(name="Account Details", roleName = "dialog")
+  addAccount = context.coyim_app.child(name = "Account Details", roleName = "dialog")
   TCNode().compare("Found add account dialog", None, addAccount)
 
 @when(u'user provides the account details')
 def step_impl(context):
-  addAccount = context.coyim_app.child(name="Account Details", roleName = "dialog")
+  addAccount = context.coyim_app.child(name = "Account Details", roleName = "dialog")
   addAccount.child(roleName = "text").typeText(context.table[0]["XMPP ID"])
   addAccount.child(roleName = "password text").typeText(context.table[0]["Password"])
 
 @when(u'saves the account')
 def step_impl(context):
-  addAccount = context.coyim_app.child(name="Account Details", roleName = "dialog")
+  addAccount = context.coyim_app.child(name = "Account Details", roleName = "dialog")
   addAccount.button("Save").doActionNamed("click")
 
 @then(u'account should be added to account list')
