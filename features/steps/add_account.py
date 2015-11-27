@@ -37,8 +37,7 @@ def step_impl(context):
 @when(u'user provides the account details')
 def step_impl(context):
   addAccount = context.coyim_app.child(name = "Account Details", roleName = "dialog")
-  addAccount.child(roleName = "text").typeText(context.table[0]["XMPP ID"])
-  addAccount.child(roleName = "password text").typeText(context.table[0]["Password"])
+  addAccount.child(roleName = "text").typeText(context.text)
 
 @when(u'saves the account')
 def step_impl(context):

@@ -11,8 +11,11 @@ Feature: Add account
     When the user opens the application
     And choses to not encrypt the configuration file
     When user provides the account details
-      |     XMPP ID    | Password |
-      |coyim@riseup.net|   pass   |
+      """
+      coyim@riseup.net
+      """
     And saves the account
     Then account should be added to account list
-      """coyim@riseup.net"""
+      """
+      coyim@riseup.net
+      """
