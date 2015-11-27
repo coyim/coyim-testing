@@ -46,6 +46,7 @@ def step_impl(context):
 
 @then(u'account should be added to account list')
 def step_impl(context):
+  context.coyim_app = root.application("CoyIM")
   accountMenu = context.coyim_app.menu("Accounts")
   menuItem = accountMenu.child(context.text)
   TCNode().compare("Account was added to menu", None, menuItem)
