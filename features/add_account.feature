@@ -1,3 +1,6 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
 Feature: Add account
 
   Scenario: Ask to add account when does not have it configured
@@ -12,7 +15,7 @@ Feature: Add account
     And choses to not encrypt the configuration file
     When user provides the account details
       """
-      coyim\@riseup.net
+      coyim@riseup.net
       """
     And saves the account
     Then account should be added to account list
