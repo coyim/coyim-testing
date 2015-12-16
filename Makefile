@@ -8,7 +8,6 @@ deps:
 
 test: coyim-bin
 	sudo docker run -t \
-		--privileged=true \
 		-v $(shell pwd):/src \
 		-v $(shell pwd)/dogtail-root:/tmp/dogtail-root \
 		-e COYIM_PATH=/src/coyim-bin \
@@ -29,7 +28,6 @@ docker-run: coyim-bin
 
 coyim-bin:
 	sudo docker run -t \
-		--privileged=true \
 		-v $(shell pwd):/src \
 		-v $(shell pwd)/dogtail-root:/tmp/dogtail-root \
 		-e COYIM_PATH=/src/coyim-bin \
