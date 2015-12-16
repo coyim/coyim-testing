@@ -12,7 +12,7 @@ Feature: Add account
     And choses to not encrypt the configuration file
     When user provides the account details
       """
-      coyim(AT)riseup.net
+      coyim@riseup.net
       """
     And saves the account
     Then account should be added to account list
