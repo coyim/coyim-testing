@@ -7,7 +7,7 @@ deps:
 	pip install behave
 
 test: coyim-bin
-	docker run -t \
+	sudo docker run -t \
 		--privileged=true \
 		-v $(shell pwd):/src \
 		-v $(shell pwd)/dogtail-root:/tmp/dogtail-root \
@@ -18,18 +18,17 @@ docker-build:
 	sudo docker build -t $(DOCKER_IMAGE) .
 
 docker-term:
-	docker run -it -v $(shell pwd):/src $(DOCKER_IMAGE) /bin/bash
+	sudo docker run -it -v $(shell pwd):/src $(DOCKER_IMAGE) /bin/bash
 
 docker-run: coyim-bin
-	docker run -it \
-		--privileged=true \
+	sudo docker run -it \
 		-v $(shell pwd):/src \
 		-v $(shell pwd)/dogtail-root:/tmp/dogtail-root \
 		-e COYIM_PATH=/src/coyim-bin \
 		$(DOCKER_IMAGE) $(RUN)
 
 coyim-bin:
-	docker run -t \
+	sudo docker run -t \
 		--privileged=true \
 		-v $(shell pwd):/src \
 		-v $(shell pwd)/dogtail-root:/tmp/dogtail-root \
