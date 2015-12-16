@@ -15,7 +15,7 @@ test: coyim-bin
 		$(DOCKER_IMAGE) behave
 
 docker-build:
-	docker build -t --privileged=true $(DOCKER_IMAGE)
+	docker build -t $(DOCKER_IMAGE) .
 
 docker-term:
 	docker run -it -v $(shell pwd):/src $(DOCKER_IMAGE) /bin/bash
