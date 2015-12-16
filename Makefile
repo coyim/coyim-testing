@@ -1,4 +1,4 @@
-DOCKER_IMAGE="twstrike/coy-testing"
+DOCKER_IMAGE="twstrike/coyim-testing"
 
 default:
 	behave
